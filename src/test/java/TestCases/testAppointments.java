@@ -4,6 +4,7 @@ import Data.TestData;
 import PO.HomePO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +21,10 @@ public class testAppointments {
     @BeforeTest
     public void setUp(){
         System.setProperty("webdriver.chrome.driver","resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePO = new HomePO(driver);
